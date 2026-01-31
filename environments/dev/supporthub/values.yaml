@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: 515347263716.dkr.ecr.us-east-1.amazonaws.com/supporthub-app
-  tag: "20260131-155400"
+  tag: "20260130-060046"
   pullPolicy: IfNotPresent
 
 containerPort: 8080
