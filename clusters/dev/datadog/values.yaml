@@ -1,0 +1,20 @@
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  site: datadoghq.eu   # or datadoghq.com
+
+  logs:
+    enabled: true
+    containerCollectAll: true
+
+  kubeStateMetricsEnabled: true
+
+  processAgent:
+    enabled: true
+
+  tags:
+    - env:dev
+    - cluster:eks-dev
+    - app:supporthub
+
+clusterAgent:
+  enabled: true
