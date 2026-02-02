@@ -6,17 +6,23 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://helm.datadoghq.com
-    chart: datadog
-    targetRevision: 3.164.1
-    helm:
-      valueFiles:
-        - values.yaml
-
   destination:
     server: https://kubernetes.default.svc
     namespace: datadog
+
+  sources:
+    # 1) Helm chart source
+    - repoURL: https://helm.datadoghq.com
+      chart: datadog
+      targetRevision: 3.164.1
+      helm:
+        valueFiles:
+          - $values/clusters/dev/datadog/values.yaml
+
+    # 2) Git source for values
+    - repoURL: https://github.com/ozistephen/ozistephen-supporthub-gitops.git
+      targetRevision: main
+      ref: values
 
   syncPolicy:
     automated:
