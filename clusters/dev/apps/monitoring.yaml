@@ -33,6 +33,6 @@ spec:
       helm:
         valueFiles:
           - $values/environments/dev/monitoring/values.yaml
-    - repoURL: https://github.com/oziomastephen/oziomastephen-supporthub-gitops.git
+    - repoURL: https://github.com/ozistephen/ozistephen-supporthub-gitops.git
       targetRevision: main
       ref: values
