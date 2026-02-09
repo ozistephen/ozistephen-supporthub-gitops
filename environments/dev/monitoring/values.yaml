@@ -8,8 +8,7 @@ grafana:
     enabled: true
     type: pvc
     existingClaim: monitoring-grafana
-    storageClassName: gp2
-
+    
 prometheus:
   enabled: true
   prometheusSpec:
