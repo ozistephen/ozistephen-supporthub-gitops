@@ -5,18 +5,23 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   source:
     repoURL: https://github.com/ozistephen/ozistephen-supporthub-gitops.git
     targetRevision: main
     path: apps/monitoring
     directory:
       recurse: true
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
+      - Replace=true
