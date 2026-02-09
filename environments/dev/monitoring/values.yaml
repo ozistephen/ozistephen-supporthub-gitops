@@ -5,13 +5,13 @@ grafana:
   adminPassword: "change-me-now"
   defaultDashboardsEnabled: true
   persistence:
-    persistence:
     enabled: true
     type: pvc
     existingClaim: monitoring-grafana
-    storageClassName: null
+    storageClassName: gp2
 
 prometheus:
+  enabled: true
   prometheusSpec:
     retention: 15d
     resources:
@@ -28,6 +28,7 @@ prometheus:
               storage: 30Gi
 
 alertmanager:
+  enabled: true
   alertmanagerSpec:
     storage:
       volumeClaimTemplate:
