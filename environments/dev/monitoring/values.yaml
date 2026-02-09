@@ -5,9 +5,11 @@ grafana:
   adminPassword: "change-me-now"
   defaultDashboardsEnabled: true
   persistence:
+    persistence:
     enabled: true
-    size: 10Gi
-    storageClassName: gp2
+    type: pvc
+    existingClaim: monitoring-grafana
+    storageClassName: null
 
 prometheus:
   prometheusSpec:
