@@ -31,5 +31,5 @@ spec:
       name: alertmanager-slack
       namespace: monitoring
       jsonPointers:
-        - /data/slack-webhook-url
+        - /data
 
