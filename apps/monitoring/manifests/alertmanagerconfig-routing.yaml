@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: main-routing
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  route:
+    groupBy: ["namespace", "alertname", "severity"]
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+    receiver: slack-warning
+    routes:
+      - matchers:
+          - name: severity
+            value: critical
+            matchType: "="
+        receiver: slack-critical
+
+  receivers:
+    - name: slack-warning
+      slackConfigs:
+        - apiURL:
+            name: alertmanager-slack
+            key: slack-webhook-url
+          channel: "#alerts-warning"
+          sendResolved: true
+          title: "[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}"
+          text: >
+            *Severity:* {{ .CommonLabels.severity }}
+            *Namespace:* {{ .CommonLabels.namespace }}
+            *Summary:* {{ .CommonAnnotations.summary }}
+            *Description:* {{ .CommonAnnotations.description }}
+
+    - name: slack-critical
+      slackConfigs:
+        - apiURL:
+            name: alertmanager-slack
+            key: slack-webhook-url
+          channel: "#alerts-critical"
+          sendResolved: true
+          title: "[{{ .Status | toUpper }}] 🔥 {{ .CommonLabels.alertname }}"
+          text: >
+            *Severity:* {{ .CommonLabels.severity }}
+            *Namespace:* {{ .CommonLabels.namespace }}
+            *Summary:* {{ .CommonAnnotations.summary }}
+            *Description:* {{ .CommonAnnotations.description }}
