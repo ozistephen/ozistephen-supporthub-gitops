@@ -25,7 +25,7 @@ spec:
         - apiURL:
             name: alertmanager-slack
             key: slack-webhook-url
-          channel: "#alerts-warning"
+          channel: "#alerts-critical"
           sendResolved: true
           title: "[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}"
           text: >
@@ -47,3 +47,4 @@ spec:
             *Namespace:* {{ .CommonLabels.namespace }}
             *Summary:* {{ .CommonAnnotations.summary }}
             *Description:* {{ .CommonAnnotations.description }}
+  
