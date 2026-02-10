@@ -5,38 +5,15 @@ fullnameOverride: "kps"
 
 grafana:
   enabled: true
-  adminPassword: "change-me-now"
   defaultDashboardsEnabled: true
+
+  admin:
+    existingSecret: grafana-admin
+    userKey: admin-user
+    passwordKey: admin-password
+
   persistence:
     enabled: true
     type: pvc
     existingClaim: monitoring-grafana
-
-prometheus:
-  enabled: true
-  prometheusSpec:
-    retention: 15d
-    resources:
-      requests:
-        cpu: 200m
-        memory: 1Gi
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: gp2
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 30Gi
-
-alertmanager:
-  enabled: true
-  alertmanagerSpec:
-    storage:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: gp2
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 5Gi
+    storageClassName: null
