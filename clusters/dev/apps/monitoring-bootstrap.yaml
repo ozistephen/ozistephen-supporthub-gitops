@@ -24,3 +24,12 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: alertmanager-slack
+      namespace: monitoring
+      jsonPointers:
+        - /data
+
